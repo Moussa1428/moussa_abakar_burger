@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admincontroller;
+use App\Http\Controllers\Api\ClientAuthController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\Clientcontroller;
 use App\Http\Controllers\CommandeController;
@@ -8,6 +9,29 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\Usercontroller;
 use Illuminate\Support\Facades\Route;
+
+
+
+Route::get('/', [Clientcontroller::class, 'index'])->name('client.index');
+Route::get('/menu', [Clientcontroller::class, 'menu'])->name('client.menu');
+Route::get('/commande', [Clientcontroller::class, 'commandes'])->name('client.commandes');
+Route::get('/panier', [Clientcontroller::class, 'panier'])->name('client.panier');
+Route::get('/commande/detail/{id}', [Clientcontroller::class, 'detailCommande'])->name('client.detailCommande');
+Route::get('/panier/add/{id}', [Clientcontroller::class, 'addToPanier'])->name('client.addToPanier');
+Route::get('/panier/remove/{id}', [Clientcontroller::class,'removeFromPanier'])->name('client.removeFromPanier');
+Route::post('/commande/store', [Clientcontroller::class,'storeCommande'])->name('client.storeCommande');
+Route::get('/commande/pdf/{id}', [Clientcontroller::class, 'pdfCommande'])->name('client.pdfCommande');
+Route::get('/fcaturesclient', [Clientcontroller::class, 'facturesclient'])->name('client.fcaturesclient');
+Route::get('/profileclient', [Clientcontroller::class, 'profileclient'])->name('client.profileclient');
+
+
+Route::get('/registerclient', [Clientcontroller::class, 'registerclient'])->name('client.registerclient');
+Route::get('/loginclient', [Clientcontroller::class, 'loginclient'])->name('client.loginclient');
+Route::post('/registerclient/store', [Clientcontroller::class,'storeclient'])->name('client.storeclient');
+Route::post('/loginclient/store', [ClientAuthController::class, 'loginclient'])->name('client.loginclient');
+
+
+
 
 
 Route::get('/dashboard',[Admincontroller::class,'index'])->name('admin.index');
@@ -20,7 +44,7 @@ Route::get('/parametres', [Admincontroller::class, 'parametres'])->name('admin.p
 Route::get('/utilisateurs/employees', [Admincontroller::class, 'employees'])->name('admin.gestionnaires');
 
 
-Route::get('/', [Usercontroller::class, 'loginForm'])->name('login.form');
+Route::get('/login', [Usercontroller::class, 'loginForm'])->name('login.form');
 Route::get('/logout', [Usercontroller::class, 'logout'])->name('logout');
 Route::post('/login', [Usercontroller::class, 'login'])->name('login');
 Route::get('/register', [Usercontroller::class, 'register'])->name('register.form');
@@ -28,7 +52,6 @@ Route::post('/register/store', [Usercontroller::class, 'store'])->name('register
 Route::get('/profile', [Usercontroller::class, 'profile'])->name('profile');
 Route::post('/profile/update', [Usercontroller::class, 'updateProfile'])->name('updateProfile');
 
-Route::get('/index', [Clientcontroller::class, 'index'])->name('client.index');
 
 
 Route::post('/admin/utilisateurs', [UserController::class, 'storeuser'])->name('adminstore.store');

@@ -18,6 +18,30 @@ class Clientcontroller extends Controller
         return view('Client.index');
     }
 
+    public function menu(){
+        return view('Client.menu');
+    }
+    public function commandes(){
+        return view('Client.commandes');
+    }
+    public function panier(){
+        return view('Client.panier');
+    }
+    public function facturesclient(){
+        return view('Client.factures');
+    }
+
+    public function profileclient(){
+        return view('Client.profile');
+    }
+    public function registerclient(){
+        return view('Client.register');
+    }
+    public function loginclient(){
+        return view('Client.login');
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
